@@ -1,0 +1,49 @@
+{
+  "name": "use-sync-query",
+  "version": "0.0.1",
+  "description": "将查询条件同步到url的参数中",
+  "main": "lib/index.js",
+  "types": "./types/index.d.ts",
+  "scripts": {
+    "remove": "rimraf lib && rimraf types",
+    "tsc": "npm run remove && tsc",
+    "prepublish": "npm run build",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/supermajinbo/use-sync-query.git"
+  },
+  "keywords": [
+    "sync",
+    "query",
+    "url",
+    "vue",
+    "vue3"
+  ],
+  "files": [
+    "src",
+    "lib",
+    "types"
+  ],
+  "author": "majinbo <747672694@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.48.2",
+    "@typescript-eslint/parser": "^5.48.2",
+    "eslint": "^8.32.0",
+    "rimraf": "^3.0.2",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "bugs": {
+    "url": "https://github.com/supermajinbo/use-sync-query/issues"
+  },
+  "homepage": "https://github.com/supermajinbo/use-sync-query",
+  "sideEffects": false
+}
