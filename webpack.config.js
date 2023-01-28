@@ -18,7 +18,7 @@ module.exports = {
   },
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, 'lib'),
+    path: path.resolve(__dirname, './package/lib'),
     clean: true,
     library: {
       type: 'module'

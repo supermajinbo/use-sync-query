@@ -1,0 +1,31 @@
+{
+  "name": "use-sync-query",
+  "version": "0.0.2",
+  "description": "将查询条件同步到url的参数中",
+  "main": "lib/index.js",
+  "types": "./types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/supermajinbo/use-sync-query.git"
+  },
+  "keywords": [
+    "sync",
+    "query",
+    "url",
+    "vue",
+    "vue3"
+  ],
+  "files": [
+    "lib",
+    "types"
+  ],
+  "author": "majinbo <747672694@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^3.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/supermajinbo/use-sync-query/issues"
+  },
+  "homepage": "https://github.com/supermajinbo/use-sync-query"
+}
