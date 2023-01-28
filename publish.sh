@@ -38,7 +38,7 @@ echo "--------------------开始发布--------------------"
 new_version=`npm version $version_name`
 
 # 推送 npm 仓库
-npm publich --registry=https://registry.npmjs.org
+npm publish --registry=https://registry.npmjs.org
 
 if [ $? == 0 ]; then
     echo "\033[1;32m发布成功: $new_version"
@@ -46,18 +46,16 @@ else
     echo "\033[1;31m发布失败"
 fi
 
+echo "\033[0m--------------------npm 推送完成--------------------"
+
 # 回到外层目录
 cd ../
 
 git add .
 git commit -m "auto commit@$new_version"
 
-# 更新版本号
+# 更新版本号,会自动打tag
 npm version $version_name
-git add .
-git commit -m "auto update version@$new_version"
-
-git tag $new_version
 
 
 # git push
