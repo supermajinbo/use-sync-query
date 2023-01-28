@@ -140,3 +140,8 @@ const [...res] = useSyncQuery(config, options);
 ```
 
 > 如果指定了 encode 函数，那么该函数必须返回一个 Object 对象
+
+
+### 变更日志
+
+[变更日志](./CHANGELOG.md)

@@ -17,7 +17,8 @@
   ],
   "files": [
     "lib",
-    "types"
+    "types",
+    "CHANGELOG.md"
   ],
   "author": "majinbo <747672694@qq.com>",
   "license": "MIT",
