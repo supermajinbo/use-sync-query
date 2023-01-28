@@ -1,6 +1,6 @@
 {
   "name": "use-sync-query",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "将查询条件同步到url的参数中",
   "main": "lib/index.js",
   "types": "./types/index.d.ts",

@@ -114,9 +114,11 @@ function useSyncQuery(
       () => _ref.value,
       (newVal: any, oldValue: any) => {
         if (newVal !== oldValue) {
+          // 将 Proxy 代理的 Array ,转换为 Array
+          const tempVal = Array.isArray(newVal) ? Array.from(newVal) : newVal;
           _queryMap = {
             ..._queryMap,
-            ...encode({ query: _queryMap, value: newVal, key })
+            ...encode({ query: _queryMap, value: tempVal, key })
           };
           _syncToQuery();
         }
