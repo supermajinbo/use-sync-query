@@ -1,4 +1,5 @@
 import { Ref, ref, watch } from 'vue';
+import { isWhiteSpace } from './utils';
 
 export type IQuery = Record<string, string | string[]>;
 
@@ -11,31 +12,24 @@ export interface IEncodeDecode {
 export interface IUseSyncQuery {
   key: string;
   value?: any;
+  ignoreWhiteSpace?: boolean;
   decode?: (options: IEncodeDecode) => any;
   encode?: (options: IEncodeDecode) => Record<string, string>;
 }
 
-// 获取 query 中的 key
-// const keys = (): string[] => {
-//   const { href } = window.location;
-//   const query = (href.split('?')[1] ?? '').split('&');
-//   const set = new Set<string>();
-//   query.forEach((item) => {
-//     const [key] = item.split('=');
-//     set.add(key);
-//   });
-//   return Array.from(set);
-// };
-
-// @ts-ignore
-// URLSearchParams.prototype.keys = URLSearchParams.prototype.keys ?? keys;
+export interface IOptions {
+  ignoreWhiteSpace?: boolean;
+}
 
 /**
  * 同步搜索条件到query
  * @param config
  * @returns
  */
-function useSyncQuery(config: IUseSyncQuery[]): Ref<any>[] {
+function useSyncQuery(
+  config: IUseSyncQuery[],
+  options: IOptions = { ignoreWhiteSpace: true }
+): Ref<any>[] {
   let _queryMap: { [props: string]: any } = {};
   const _config = config;
   const _refMap: { [props: string]: Ref<any> } = {};
@@ -44,6 +38,16 @@ function useSyncQuery(config: IUseSyncQuery[]): Ref<any>[] {
   const defaultConfig = {
     defaultEncode: ({ key, value }: IEncodeDecode) => ({ [key]: value }),
     defaultDecode: ({ key, query }: IEncodeDecode) => query[key]
+  };
+
+  const addParams = (
+    urlParams: URLSearchParams,
+    key: string,
+    value: string
+  ) => {
+    // 忽略空白参数
+    if (options?.ignoreWhiteSpace === true && isWhiteSpace(value)) return;
+    urlParams.append(key, encodeURI(value));
   };
 
   /**
@@ -56,10 +60,10 @@ function useSyncQuery(config: IUseSyncQuery[]): Ref<any>[] {
     Object.entries(json).forEach(([key, value]) => {
       if (Array.isArray(value)) {
         value.forEach((item) => {
-          urlParams.append(key, item);
+          addParams(urlParams, key, item);
         });
       } else {
-        urlParams.append(key, value);
+        addParams(urlParams, key, value);
       }
     });
     return `?${urlParams.toString()}`;
@@ -82,11 +86,11 @@ function useSyncQuery(config: IUseSyncQuery[]): Ref<any>[] {
   const _syncFromQuery = () => {
     const query: IQuery = {};
     const { search, hash } = window.location;
-    const q = (search || hash).replace(/#\//, '').replace(/\?/, '');
+    const q = (search || hash).replace(/^#\//, '').replace(/\?/, '');
     const urlParams = new URLSearchParams(q);
-    //@ts-ignore
+
     for (const key of urlParams.keys()) {
-      const values = urlParams.getAll(key);
+      const values = urlParams.getAll(key).map((e) => decodeURI(e));
       query[key] = values?.length === 1 ? values[0] : values;
     }
 
@@ -127,5 +131,5 @@ function useSyncQuery(config: IUseSyncQuery[]): Ref<any>[] {
   return result;
 }
 
-export default (conf: IUseSyncQuery[]): Ref<any>[] =>
-  new (useSyncQuery as any)(conf);
+export default (conf: IUseSyncQuery[], options?: IOptions): Ref<any>[] =>
+  new (useSyncQuery as any)(conf, options);

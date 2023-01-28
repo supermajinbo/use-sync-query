@@ -8,9 +8,13 @@ export interface IEncodeDecode {
 export interface IUseSyncQuery {
     key: string;
     value?: any;
+    ignoreWhiteSpace?: boolean;
     decode?: (options: IEncodeDecode) => any;
     encode?: (options: IEncodeDecode) => Record<string, string>;
 }
-declare const _default: (conf: IUseSyncQuery[]) => Ref<any>[];
+export interface IOptions {
+    ignoreWhiteSpace?: boolean;
+}
+declare const _default: (conf: IUseSyncQuery[], options?: IOptions) => Ref<any>[];
 export default _default;
 //# sourceMappingURL=index.d.ts.map

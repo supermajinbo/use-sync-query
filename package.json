@@ -1,13 +1,12 @@
 {
   "name": "use-sync-query",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "将查询条件同步到url的参数中",
   "private": true,
   "scripts": {
     "remove": "rimraf package",
     "tsc": "npm run remove && tsc",
-    "build": "webpack",
-    "publish": "npm run build && cd package && git publish"
+    "build": "webpack"
   },
   "license": "MIT",
   "dependencies": {
