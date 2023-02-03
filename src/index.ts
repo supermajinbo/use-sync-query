@@ -66,7 +66,8 @@ function useSyncQuery(
         addParams(urlParams, key, value);
       }
     });
-    return `?${urlParams.toString()}`;
+    const queryStr = urlParams.toString();
+    return queryStr ? `?${queryStr}` : '';
   };
 
   // 将 query 数据同步到浏览器 url 的 query 中
@@ -122,7 +123,8 @@ function useSyncQuery(
           };
           _syncToQuery();
         }
-      }
+      },
+      { deep: true }
     );
     return _ref;
   }

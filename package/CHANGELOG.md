@@ -1,5 +1,11 @@
 # 变更日志
 
+### v0.0.6
+
+fix: 参数为空时，url中不显示单独的一个？
+
+feature: 开启深度监听
+
 ### v0.0.5
 
 fix: value 为数组时，encode 函数的参数（value）是一个 Proxy 对象
